@@ -3,6 +3,7 @@ package com.teaching;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.teaching.mapper.StudentMapper;
 import com.teaching.pojo.Student;
+import com.teaching.service.StudentService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,21 +25,33 @@ class TeachingApplicationTests {
     }
 
     @Autowired
-    private StudentMapper studentMapper;
+    private StudentService studentService;
     @Test
-    public void testSelect() {
-        System.out.println("----- selectAll method test ------");
-        List<Student> studentList = studentMapper.selectList(null);
-        studentList.forEach(System.out::println);
+    public void testGetByPhone() {
+        System.out.println("----------------------------");
+        int a = studentService.getByPhone("888");
+        System.out.println(a);
 
-        System.out.println("----- selectOne method test ------");
-        QueryWrapper<Student> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("phone", "123");
-        if(studentMapper.selectOne(queryWrapper) == null ) {
-            System.out.println("none ----------------------------------");
-        } else {
-            System.out.println("have");
-        }
-
+        boolean checkPassword = studentService.checkPassword(10, "698d51a19d8a121ce581499d7b70166");
+        System.out.println("------------check password----------------");
+        System.out.println(checkPassword);
     }
+
+//    @Autowired
+//    private StudentMapper studentMapper;
+//    @Test
+//    public void testSelect() {
+//        System.out.println("----- selectAll method test ------");
+//        List<Student> studentList = studentMapper.selectList(null);
+//        studentList.forEach(System.out::println);
+//
+//        System.out.println("----- selectOne method test ------");
+//        QueryWrapper<Student> queryWrapper = new QueryWrapper<>();
+//        queryWrapper.eq("phone", "123");
+//        if(studentMapper.selectOne(queryWrapper) == null ) {
+//            System.out.println("none ----------------------------------");
+//        } else {
+//            System.out.println("have");
+//        }
+//    }
 }

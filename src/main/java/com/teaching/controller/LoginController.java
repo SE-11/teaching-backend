@@ -49,4 +49,45 @@ public class LoginController {
         }
         return retMap;
     }
+
+    @PostMapping("/login")
+    public Map<String, Object> login(@RequestBody Map<String, Object> map) {
+        // 查询是否存在该手机号码
+        String phone =  (String) map.get("phone");
+        String password = (String) map.get("password");
+        int studentId = studentService.getByPhone(phone);
+        int teacherId = teacherService.getByPhone(phone);
+        Map<String, Object> retMap = new HashMap<>();
+
+        if((studentId == -1) && (teacherId == -1)) {
+            retMap.put("errorCode", -1);
+            retMap.put("msg", "该用户不存在");
+        } else if(studentId != -1) {
+            // 该用户为学生
+            // 校验密码
+            if(studentService.checkPassword(studentId, password)) {
+                retMap.put("errorCode", 1);
+                retMap.put("msg", "登陆成功");
+                retMap.put("userType", "student");
+                retMap.put("id", studentId);
+            } else {
+                retMap.put("errorCode", -2);
+                retMap.put("msg", "密码错误");
+            }
+
+        } else {
+            // 该用户为教师
+            // 校验密码
+            if(teacherService.checkPassword(teacherId, password)) {
+                retMap.put("errorCode", 1);
+                retMap.put("msg", "登陆成功");
+                retMap.put("userType", "teacher");
+                retMap.put("id", teacherId);
+            } else {
+                retMap.put("errorCode", -2);
+                retMap.put("msg", "密码错误");
+            }
+        }
+        return retMap;
+    }
 }

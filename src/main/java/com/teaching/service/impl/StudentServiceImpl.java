@@ -22,8 +22,22 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public int save(Student student) {
-        int retId = studentMapper.insert(student);
-        return retId;
+        int id = studentMapper.insert(student);
+        return id;
+    }
+
+    @Override
+    public int getByPhone(String phone) {
+        QueryWrapper<Student> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("phone", phone);
+        // int retId;
+        Student student = studentMapper.selectOne(queryWrapper);
+        if(student == null) {
+            return -1;
+        } else {
+            // System.out.println(student.toString());
+            return student.getStudentId();
+        }
     }
 
     @Override
@@ -40,5 +54,16 @@ public class StudentServiceImpl implements StudentService {
             retId = -1;
         }
         return retId;
+    }
+
+    // 用户密码校验
+    @Override
+    public boolean checkPassword(int id, String password) {
+        Student student = studentMapper.selectById(id);
+        if(student.getPassword().equals(password)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

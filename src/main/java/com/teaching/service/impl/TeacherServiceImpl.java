@@ -18,6 +18,17 @@ public class TeacherServiceImpl implements TeacherService {
         return retId;
     }
 
+    @Override
+    public int getByPhone(String phone) {
+        QueryWrapper<Teacher> teacherQueryWrapper = new QueryWrapper<>();
+        teacherQueryWrapper.eq("phone", phone);
+        Teacher teacher = teacherMapper.selectOne(teacherQueryWrapper);
+        if(teacher == null) {
+            return -1;
+        } else {
+            return teacher.getTeacherId();
+        }
+    }
     /*
     * 成功返回 teacherId
     * 失败返回 -1
@@ -35,5 +46,15 @@ public class TeacherServiceImpl implements TeacherService {
             retId = -1;
         }
         return retId;
+    }
+
+    @Override
+    public boolean checkPassword(int id, String password) {
+        Teacher teacher = teacherMapper.selectById(id);
+        if(teacher.getPassword().equals(password)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
