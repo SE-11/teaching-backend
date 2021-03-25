@@ -25,4 +25,6 @@ public interface StudentService {
     int getByPhone(String phone);
 
     boolean checkPassword(int id, String password);
+
+    Student getStudentById(Integer id);
 }

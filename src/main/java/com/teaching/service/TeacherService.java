@@ -7,4 +7,5 @@ public interface TeacherService {
     int registered(Teacher teacher);
     int getByPhone(String phone);
     boolean checkPassword(int id, String password);
+    Teacher getTeacherById(Integer id);
 }

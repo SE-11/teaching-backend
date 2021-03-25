@@ -74,7 +74,6 @@ public class LoginController {
                 retMap.put("errorCode", -2);
                 retMap.put("msg", "密码错误");
             }
-
         } else {
             // 该用户为教师
             // 校验密码

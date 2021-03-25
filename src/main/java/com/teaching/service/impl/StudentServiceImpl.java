@@ -66,4 +66,10 @@ public class StudentServiceImpl implements StudentService {
             return false;
         }
     }
+
+    @Override
+    public Student getStudentById(Integer id) {
+        Student student = studentMapper.selectById(id);
+        return student;
+    }
 }

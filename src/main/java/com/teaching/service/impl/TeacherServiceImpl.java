@@ -57,4 +57,10 @@ public class TeacherServiceImpl implements TeacherService {
             return false;
         }
     }
+
+    @Override
+    public Teacher getTeacherById(Integer id) {
+        Teacher teacher = teacherMapper.selectById(id);
+        return teacher;
+    }
 }
