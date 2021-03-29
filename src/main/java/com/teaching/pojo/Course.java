@@ -11,7 +11,7 @@ public class Course {
     private Integer courseId;
     private String courseName;
     private Integer teacherId;
-    private Integer invitationCode;
+    private String invitationCode;
     private String courseStartTime;
     private String courseEndTime;
     private String cover;
