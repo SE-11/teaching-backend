@@ -44,7 +44,7 @@ public class TeacherController {
 
     /*
     * 教师请求所教的所有课程
-    * 返回 VO 为 CourseTeahcerVO
+    * 返回 VO 为 CourseTeacherVO
     * */
     @GetMapping("/teacher/listCourse/{id}")
     public List<CourseTeacherVO> listCourseInfoByTeacherId(@PathVariable("id") Integer id) {
@@ -54,7 +54,7 @@ public class TeacherController {
     }
 
     /*
-    * 待测试的接口
+    * 待测试的接口 初测 no-error
     * */
     @GetMapping("/teacher/listJoinCourse/{id}")
     public List<CourseTeacherVO> listJoinCourse(@PathVariable("id") Integer id) {
@@ -64,7 +64,7 @@ public class TeacherController {
         courseIdList = teacherCourseService.getAllJoinCourseId(id);
         // 根据这些id找到所有对应课程的 CourseTeacherVO
         courseTeacherVOS = courseService.listCourseInfoByCourseIdList(courseIdList);
-        return courseTeacherVOS
+        return courseTeacherVOS;
     }
 
     //Get Course Info by teacher id
@@ -76,7 +76,7 @@ public class TeacherController {
     }
 
     /*
-     * 待测试的接口
+     * 待测试的接口, 初测 no error
      * */
     // 参数：教师id   邀请码
     // teacher 加入课程
