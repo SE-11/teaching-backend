@@ -1,7 +1,11 @@
 package com.teaching.util;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
-
+/*
+* 该类实现了一些工具函数，诸如生成课程码等
+* */
 public final class Util {
     private static final int CodeLength = 6;
     public static String generateInvitationCode() {

@@ -53,9 +53,6 @@ public class TeacherController {
         return courseTeacherVOS;
     }
 
-    /*
-    * 待测试的接口 初测 no-error
-    * */
     @GetMapping("/teacher/listJoinCourse/{id}")
     public List<CourseTeacherVO> listJoinCourse(@PathVariable("id") Integer id) {
         // 根据教师 id 找到该教师所选的所有课程的 id
@@ -75,9 +72,6 @@ public class TeacherController {
         return courseTeacherVO;
     }
 
-    /*
-     * 待测试的接口, 初测 no error
-     * */
     // 参数：教师id   邀请码
     // teacher 加入课程
     // 返回课程信息
