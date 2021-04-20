@@ -14,4 +14,8 @@ public class Teacher {
     private String password;
     private String university;
     private String phone;
+    // add
+    private String cover;
+    private String description;
+    private String address;
 }
