@@ -1,7 +1,9 @@
 package com.teaching.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.teaching.mapper.AnnounceMapper;
 import com.teaching.mapper.CourseMapper;
+import com.teaching.pojo.Announce;
 import com.teaching.pojo.Course;
 import com.teaching.service.CourseService;
 import com.teaching.util.Util;
@@ -17,6 +19,8 @@ public class CourseServiceImpl implements CourseService {
     @Autowired
     private CourseMapper courseMapper;
 
+    @Autowired
+    private AnnounceMapper announceMapper;
 
     // 插入成功 返回 id
     // 插入时创建 6位 唯一课堂码
@@ -89,5 +93,24 @@ public class CourseServiceImpl implements CourseService {
             courseTeacherVOS.add(courseMapper.selectCourseInfoByCourseId(item));
         });
         return courseTeacherVOS;
+    }
+
+    @Override
+    public int saveAnnounce(Announce announce) {
+        announceMapper.insert(announce);
+        return announce.getId();
+    }
+
+    @Override
+    public Announce getAnnById(Integer id) {
+        Announce announce = announceMapper.selectById(id);
+        return announce;
+    }
+
+    @Override
+    public List<Announce> listAnnByCourseId(Integer id) {
+        QueryWrapper<Announce> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("course_id", id);
+        return announceMapper.selectList(queryWrapper);
     }
 }

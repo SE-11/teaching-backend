@@ -14,5 +14,5 @@ public class Course {
     private String invitationCode;
     private String courseStartTime;
     private String courseEndTime;
-    private String cover;
+    private String courseCover;
 }

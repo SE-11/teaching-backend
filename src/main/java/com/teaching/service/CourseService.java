@@ -1,5 +1,6 @@
 package com.teaching.service;
 
+import com.teaching.pojo.Announce;
 import com.teaching.pojo.Course;
 import com.teaching.vo.CourseTeacherVO;
 
@@ -22,4 +23,10 @@ public interface CourseService {
     int getIdByInvitationCode(String invitationCode);
 
     List<CourseTeacherVO> listCourseInfoByCourseIdList(List<Integer> courseIdList);
+
+    int saveAnnounce(Announce announce);
+
+    Announce getAnnById(Integer id);
+
+    List<Announce> listAnnByCourseId(Integer id);
 }
