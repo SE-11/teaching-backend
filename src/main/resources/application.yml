@@ -4,8 +4,24 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 123456
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 100MB
+  web:
+    # 文件存储保存的根目录 部署改 或考虑oss
+    resources:
+      static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${web.upload-path}
+  mvc:
+    static-path-pattern: /**
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 server:
   port: 8080
+
+
+tc:
+  upload-path: D:/TC/
+
+
