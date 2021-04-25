@@ -2,7 +2,9 @@ package com.teaching.controller;
 
 import com.teaching.pojo.Announce;
 import com.teaching.pojo.Course;
+import com.teaching.pojo.Courseware;
 import com.teaching.service.CourseService;
+import com.teaching.service.CoursewareService;
 import com.teaching.vo.CourseTeacherVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,6 +24,9 @@ import java.util.Map;
 public class CourseController {
     @Autowired
     private CourseService courseService;
+
+    @Autowired
+    private CoursewareService coursewareService;
 
     @Value("${tc.upload-path}")
     private String uploadPath;
@@ -60,13 +65,28 @@ public class CourseController {
         try {
             String url = req.getScheme() + "://" + req.getServerName() + ":" + req.getServerPort() + "/courseres/" + courseId + "/courseware/" +file.getOriginalFilename();
             file.transferTo(new File(folder, file.getOriginalFilename()));
+
+            Courseware retCourseware = new Courseware();
+            System.out.println("--------------");
+            System.out.println(retCourseware.toString());
+            retCourseware.setCourseId(courseId);
+            retCourseware.setPath(url);
+            retCourseware.setOldFilename(file.getOriginalFilename());
+            retCourseware.setNewFilename(file.getOriginalFilename());
+            retCourseware.setCourseId(coursewareService.save(retCourseware));
+
             map.put("status", "成功");
-            map.put("url", url);
-            System.out.println(map.toString());
+            map.put("fileInfo", retCourseware);
         } catch (IOException e) {
             e.printStackTrace();
             map.put("status", "失败");
         }
         return map;
     }
+
+    @GetMapping("/course/courseware/listCourseware/{courseId}")
+    public List<Courseware> listCourseware(@PathVariable("courseId") Integer courseId) {
+        return coursewareService.listCoursewareByCourseId(courseId);
+    }
+
 }
