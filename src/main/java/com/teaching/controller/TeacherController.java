@@ -53,6 +53,9 @@ public class TeacherController {
         return courseTeacherVOS;
     }
 
+    /*
+     * 教师请求学习的所有课程
+     * */
     @GetMapping("/teacher/listJoinCourse/{id}")
     public List<CourseTeacherVO> listJoinCourse(@PathVariable("id") Integer id) {
         // 根据教师 id 找到该教师所选的所有课程的 id
@@ -64,7 +67,10 @@ public class TeacherController {
         return courseTeacherVOS;
     }
 
-    //Get Course Info by teacher id
+    /*
+     * 根据课程id查找
+     * */
+    //Get Course Info by course id
     @GetMapping("/teacher/getCourseInfoById/{id}")
     public CourseTeacherVO getCourseInfoByCourseId(@PathVariable("id") Integer id) {
         CourseTeacherVO courseTeacherVO = new CourseTeacherVO();

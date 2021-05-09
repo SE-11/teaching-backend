@@ -16,4 +16,7 @@ public class Student {
     private String avatar;
     private String college;
     private String university;
+    private String cover;
+    private String address;
+    private String description;
 }

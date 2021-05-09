@@ -8,6 +8,11 @@ import lombok.Data;
 public class StudentCourse {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
-    private Integer StudentId;
-    private Integer CourseId;
+    private Integer studentId;
+    private Integer courseId;
+
+    public StudentCourse(int studentId, int courseId) {
+        this.studentId = studentId;
+        this.courseId = courseId;
+    }
 }
